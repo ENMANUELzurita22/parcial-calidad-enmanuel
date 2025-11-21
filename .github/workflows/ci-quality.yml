@@ -1,0 +1,27 @@
+name: CI Calidad Software
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Instalar dependencias
+        run: npm install
+
+      - name: Ejecutar Linter
+        run: npm run lint
+
+      - name: Ejecutar Pruebas con Cobertura
+        run: npm test
